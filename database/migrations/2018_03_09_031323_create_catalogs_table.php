@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdminsTable extends Migration
+class CreateCatalogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name',128);
-            $table->string('username',32);
-            $table->string('password',32);
+        Schema::create('catalogs', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 128);
+            $table->integer('parent_id')->default(0);
+            $table->tinyInteger('sort_order')->default(0);
             $table->integer('soft_deleted')->default(0);
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('catalogs');
     }
 }
